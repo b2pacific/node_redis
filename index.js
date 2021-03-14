@@ -3,7 +3,7 @@ const cluster = require("cluster");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 
-const route = require("./route");
+const route = require("./routes/route");
 const Data = require("./schema/data");
 
 const numCPUs = require("os").cpus().length;
@@ -65,7 +65,10 @@ const info = {
   },
 };
 
-mongoose.connect(process.env.DATABASE_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(process.env.DATABASE_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+mongoose.connect("mongodb://localhost:27017/new_db", {useNewUrlParser: true, useUnifiedTopology: true});
+
 
 if (cluster.isMaster) {
   const data = new Data(info);

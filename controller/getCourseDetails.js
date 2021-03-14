@@ -1,11 +1,7 @@
-const express = require("express");
-const router = express.Router();
+const util = require("../util");
+const Data = require("../schema/data");
 
-const util = require("./util");
-const Data = require("./schema/data");
-const cache = require("./cache");
-
-router.get("/:id", cache, async (req, res, next) => {
+const getCourseDetails = async (req, res, next) => {
   try {
     if (req.params.id) {
       const data = await Data.findOne({ _id: req.params.id });
@@ -22,6 +18,6 @@ router.get("/:id", cache, async (req, res, next) => {
   } catch (err) {
     res.json(err);
   }
-});
+};
 
-module.exports = router;
+module.exports = getCourseDetails;
